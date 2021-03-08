@@ -2,7 +2,6 @@ FROM ubuntu:20.04
 MAINTAINER Joseph Lee <development@jc-lab.net>
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG OPENWRT_IMAGE_FILE=openwrt-19.07.7-x86-64-combined-squashfs.img.gz
 
 COPY ["apt-mirror.txt", "/tmp/apt-mirror.txt"]
 COPY ["apt-proxy.txt", "/etc/apt/apt.conf.d/00proxy"]
@@ -60,9 +59,11 @@ COPY ["chroot/stage-cleanup.sh", "$WORK_DIR/chroot/tmp/stage-cleanup.sh"]
 RUN chmod +x $WORK_DIR/chroot/tmp/stage-cleanup.sh && \
     chroot $WORK_DIR/chroot/ /tmp/stage-cleanup.sh
 
-COPY ["$OPENWRT_IMAGE_FILE", "$WORK_DIR/chroot/openwrt.img.gz"]
+ARG OPENWRT_VERSION=
+COPY ["build/openwrt.img.gz", "$WORK_DIR/chroot/openwrt.img.gz"]
 COPY ["installer", "$WORK_DIR/chroot/opt/installer"]
-RUN chmod +x $WORK_DIR/chroot/opt/installer/*.sh
+RUN chmod +x $WORK_DIR/chroot/opt/installer/*.sh && \
+    echo "$OPENWRT_VERSION" > /openwrt-version.txt
 
 ARG BOOT_FIND_ID=openwrt_install
 
