@@ -11,7 +11,7 @@ GID := $(shell id -g)
 
 build/output.iso: build/openwrt.img.gz
 	docker build --build-arg OPENWRT_VERSION=${OPENWRT_VERSION} --tag=${TEMP_DOCKER_IMAGE} .
-	docker run --rm -it -v ${PWD}/build:/mnt/output ${TEMP_DOCKER_IMAGE} cp /work/output.iso /mnt/output/output.iso
+	docker run --rm -v ${PWD}/build:/mnt/output ${TEMP_DOCKER_IMAGE} cp /work/output.iso /mnt/output/output.iso
 
 build/openwrt.img.gz:
 	mkdir -p ${PWD}/build/
