@@ -4,7 +4,6 @@ MAINTAINER Joseph Lee <development@jc-lab.net>
 ARG DEBIAN_FRONTEND=noninteractive
 
 COPY ["apt-mirror.txt", "/tmp/apt-mirror.txt"]
-COPY ["apt-proxy.txt", "/etc/apt/apt.conf.d/00proxy"]
 RUN APT_REPO=$(cat /tmp/apt-mirror.txt | head -n 1) && \
     echo "APT_REPO: $APT_REPO" && \
     echo "\n\
@@ -44,8 +43,7 @@ RUN mkdir -p \
     $WORK_DIR/staging/target \
     $WORK_DIR/tmp \
     $WORK_DIR/chroot/tmp && \
-    cp /etc/apt/sources.list $WORK_DIR/chroot/etc/apt/sources.list && \
-    cp /etc/apt/apt.conf.d/00proxy $WORK_DIR/chroot/etc/apt/apt.conf.d/00proxy
+    cp /etc/apt/sources.list $WORK_DIR/chroot/etc/apt/sources.list
 
 COPY ["chroot/stage-1.sh", "$WORK_DIR/chroot/tmp/stage-1.sh"]
 RUN chmod +x $WORK_DIR/chroot/tmp/stage-1.sh && \
