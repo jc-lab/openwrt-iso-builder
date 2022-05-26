@@ -2,7 +2,7 @@ TEMP_DOCKER_IMAGE=temp-openwrt_iso_builder
 
 USE_EFI = true
 OPENWRT_VERSION=21.02.3
-OPENWRT_URL=https://downloads.openwrt.org/releases/$(OPENWRT_VERSION)/targets/x86/64/generic-squashfs-combined$(if $(filter ${USE_EFI},true),-efi,).img.gz
+OPENWRT_URL=https://downloads.openwrt.org/releases/$(OPENWRT_VERSION)/targets/x86/64/openwrt-${OPENWRT_VERSION}-x86-64-generic-squashfs-combined$(if $(filter ${USE_EFI},true),-efi,).img.gz
 
 PWD := $(shell pwd)
 UID := $(shell id -u)
