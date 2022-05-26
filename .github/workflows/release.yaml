@@ -3,9 +3,12 @@ on: push
 jobs:
   release:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        use_efi: ['true', 'false']
     steps:
       - uses: actions/checkout@v2
-      - run: make all
+      - run: make USE_EFI=${{ matrix.use_efi }} all
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
@@ -13,5 +16,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            build/output.iso
+            build/output${{ matrix.use_efi == 'true' && "-efi" || "" }}.iso
 
