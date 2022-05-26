@@ -16,5 +16,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            build/output${{ matrix.use_efi == 'true' && "-efi" || "" }}.iso
+            build/output${{ matrix.use_efi == 'true' && format("-efi") || format("") }}.iso
 
