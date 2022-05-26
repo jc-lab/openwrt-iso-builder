@@ -1,6 +1,6 @@
 TEMP_DOCKER_IMAGE=temp-openwrt_iso_builder
 
-OPENWRT_VERSION=19.07.7
+OPENWRT_VERSION=21.02.3
 OPENWRT_URL=https://downloads.openwrt.org/releases/$(OPENWRT_VERSION)/targets/x86/64/openwrt-$(OPENWRT_VERSION)-x86-64-combined-squashfs.img.gz
 
 PWD := $(shell pwd)
